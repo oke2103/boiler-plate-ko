@@ -35,6 +35,11 @@ app.post('/api/user/register', (req,res) => {
     })
 })
 
+app.get('/api/hello', (req,res) => {
+    console.log("test");
+    res.send('안녕하세요');
+})
+
 app.listen(port, () => {
 	console.log(`express is running on ${port}`);
 })
