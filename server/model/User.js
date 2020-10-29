@@ -73,7 +73,6 @@ userSchema.methods.generateToken = function(cb){
 }
 
 userSchema.statics.findByToken = function( token, cb ) {
-    console.log("asdadasa");
     var user = this;
 
     // 토큰을 Decode 한다.

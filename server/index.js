@@ -25,8 +25,21 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.post('/api/user/register', (req,res) => {
+    // 동일 이메일 중복체크
+    User.findOne( {email : req.body.email}, (err,user) => {
+        if(user){
+            return res.status(200).json({
+                success : false,
+                message : '해당 이메일은 다른 사용자가 사용중입니다.'
+            })
+        }
+    })
+
+    return;
+    
     // 회원가입 정보
     const user = new User(req.body);
+
     user.save((err,doc) => {
         if(err) return res.json({success : false,err});
         return res.status(200).json({
@@ -36,7 +49,6 @@ app.post('/api/user/register', (req,res) => {
 })
 
 app.get('/api/hello', (req,res) => {
-    console.log("test");
     res.send('안녕하세요');
 })
 
@@ -73,7 +85,6 @@ app.post('/api/user/login',(req,res) => {
 })
 
 app.get('/api/user/auth', auth , (req,res) => {
-    console.log("test");
     // // 인증성공.
     res.status(200).json({
         _id : req.user._id,
