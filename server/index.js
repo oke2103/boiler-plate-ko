@@ -35,8 +35,6 @@ app.post('/api/user/register', (req,res) => {
         }
     })
 
-    return;
-    
     // 회원가입 정보
     const user = new User(req.body);
 
